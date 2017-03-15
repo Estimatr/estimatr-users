@@ -1,0 +1,22 @@
+{
+  "name": "estimatr-users",
+  "description": "User management",
+  "main": "estimatr-users.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0-rc.2",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
+    "iron-list": "PolymerElements/iron-list#2.0-preview",
+    "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",
+    "paper-item": "PolymerElements/paper-item#2.0-preview",
+    "paper-input": "PolymerElements/paper-input#2.0-preview"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "web-component-tester": "v6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.5"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0-rc.2"
+  }
+}

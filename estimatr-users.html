@@ -1,0 +1,111 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<link rel="import" href="../paper-styles/default-theme.html">
+<link rel="import" href="../paper-styles/typography.html">
+
+<!--
+`estimatr-users`
+User management
+
+@demo demo/index.html
+-->
+<dom-module id="estimatr-users">
+  <template>
+    <style is="custom-style">
+      :host {
+        @apply(--paper-font-common-base);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      iron-list {
+        flex: 1 1 auto;
+      }
+
+      h4 {
+        padding: 5px;
+      }
+
+    </style>
+    <paper-input label="Filter" value="{{searchString::input}}"></paper-input>
+    <paper-listbox on-iron-select="_userSelected" id="usersListBox">
+      <dom-repeat items="{{users}}" as="user" filter="{{computeFilter(searchString)}}">
+        <template>
+          <paper-item>[[user.firstName]] [[user.lastName]]</paper-item>
+        </template>
+      </dom-repeat>
+    </paper-listbox>
+
+  </template>
+
+  <script>
+    class MyElement extends Polymer.Element {
+
+      static get is() { return 'estimatr-users'; }
+
+      static get properties() {
+        return {
+
+          users: {
+            type: Array,
+            notify: true,
+            reflectToAttribute: true,
+            value: () => ([])
+          }
+
+        };
+      }
+
+      /**
+       * Select a user at an index
+       * @public
+       *
+       * @params {Number} [index]
+       */
+      selectAtIndex(index = -1) {
+        this.$.usersListBox.selected = index;
+        this._fireUserSelected(index);
+      }
+
+      _userSelected() {
+        const index = this.$.usersListBox.selected;
+
+        this._fireUserSelected(index);
+      }
+
+      computeFilter(string) {
+        if (!string) {
+          // set filter to null to disable filtering
+          return null;
+        } else {
+          // return a filter function for the current search string
+          string = string.toLowerCase();
+          return function (user) {
+            const first = user.firstName.toLowerCase();
+            const last = user.lastName.toLowerCase();
+            return (first.indexOf(string) != -1 || last.indexOf(string) != -1);
+          };
+        }
+      }
+
+      /**
+       * Fires when a user is selected
+       *
+       * @event user-selected
+       */
+      _fireUserSelected(index = -1) {
+        if (index > -1) {
+          const user = this.users[index];
+          this.dispatchEvent(new CustomEvent('user-selected', { index, user }));
+        }
+      }
+
+    }
+
+    window.customElements.define(MyElement.is, MyElement);
+  </script>
+</dom-module>
