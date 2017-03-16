@@ -2,6 +2,8 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-fab/paper-fab.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
 
 <link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="../paper-styles/typography.html">
@@ -17,9 +19,10 @@ User management
     <style is="custom-style">
       :host {
         @apply(--paper-font-common-base);
-        height: 100vh;
+        /*height: 100vh;*/
         display: flex;
         flex-direction: column;
+
       }
 
       iron-list {
@@ -30,15 +33,35 @@ User management
         padding: 5px;
       }
 
+      paper-item {
+        cursor: pointer;
+      }
+
+      section {
+        display: block;
+      }
+
+      paper-fab {
+        position: relative;
+        z-index: 1000;
+        float: right;
+        margin-top: 65px;
+        margin-right: 15px;
+
+      }
+
     </style>
-    <paper-input label="Filter" value="{{searchString::input}}"></paper-input>
-    <paper-listbox on-iron-select="_userSelected" id="usersListBox">
-      <dom-repeat items="{{users}}" as="user" filter="{{computeFilter(searchString)}}">
-        <template>
-          <paper-item>[[user.firstName]] [[user.lastName]]</paper-item>
-        </template>
-      </dom-repeat>
-    </paper-listbox>
+    <section>
+      <paper-fab icon="add" title="add"></paper-fab>
+      <paper-input label="Filter" value="{{searchString::input}}"></paper-input>
+      <paper-listbox on-iron-select="_userSelected" id="usersListBox">
+        <dom-repeat items="{{users}}" as="user" filter="{{computeFilter(searchString)}}">
+          <template>
+            <paper-item>[[user.firstName]] [[user.lastName]]</paper-item>
+          </template>
+        </dom-repeat>
+      </paper-listbox>
+    </section>
 
   </template>
 

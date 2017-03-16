@@ -1,0 +1,47 @@
+{
+  "id": "",
+  "organizationId": "",
+  "firstName": "",
+  "middleName": "",
+  "lastName": "",
+  "email": "",
+  "profile": {
+    "bio": "",
+    "birthday": "",
+    "gender": "",
+    "socialMedia": [ { "kind": "Twitter", "uri": "", "isPublic": true, "isActive": true } ],
+    "photoUrl": "",
+    "_provider": {}
+  },
+  "role": "",
+  "phones": [
+    { "kind": "Mobile", "number": "801-201-2200", "isActive": true, "isPrimary": true },
+    { "kind": "Work", "number": "801-201-2200", "isActive": true, "isPrimary": false }
+  ],
+  "addresses": [
+    { "kind": "Home", "street": "", "street2": "", "city": "", "state": "", "zip": "", "isActive": true, "isPrimary": true },
+    { "kind": "Billing", "street": "", "street2": "", "city": "", "state": "", "zip": "", "isActive": true, "isPrimary": false }
+  ],
+  "services": [ { "id": "", "unit": "hourly", "rate": "" } ],
+  "notes": [
+    {
+      "id": "",
+      "text": "",
+      "isActive": true,
+      "isPublic": true,
+      "_meta": {
+        "createdAt": "",
+        "createdBy": "",
+        "updatedAt": "",
+        "updatedBy": ""
+      }
+    }
+  ],
+  "historical": [ { "hireDate": "", "terminationDate": "", "rate": "", "isCertified": true } ],
+  "_meta": {
+    "createdAt": "",
+    "createdBy": "",
+    "updatedAt": "",
+    "updatedBy": ""
+  }
+}
