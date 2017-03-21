@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-form/iron-form.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+
+<dom-module id="estimatr-user-edit">
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 10px;
+      }
+
+      .user-services {
+        border: 1px solid #cdcdcd;
+        padding: 15px;
+      }
+
+      .user-services h3 {
+        margin: 0;
+        padding: 0;
+      }
+
+      .button-actions {
+        margin-top: 25px;
+      }
+    </style>
+
+    <iron-form id="form">
+      <form>
+        <paper-input label="First Name" value="{{ user.firstName }}" required></paper-input>
+        <paper-input label="Last Name" value="{{ user.lastName }}" required></paper-input>
+        <paper-input label="Email Address" value="{{ user.email }}" required></paper-input>
+
+        <paper-button id="toggleServices" on-tap="_handleToggleService">Toggle</paper-button>
+        <iron-collapse id="collapse" opened>
+          <div class="user-services">
+            <h3>Services</h3>
+            <iron-form id="add-service">
+              <form>
+                <paper-dropdown-menu label="Service">
+                  <paper-listbox class="dropdown-content" selected="1">
+                    <paper-item>allosaurus</paper-item>
+                    <paper-item>brontosaurus</paper-item>
+                    <paper-item>carcharodontosaurus</paper-item>
+                    <paper-item>diplodocus</paper-item>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <paper-dropdown-menu label="Type">
+                  <paper-listbox class="dropdown-content" selected="1">
+                    <paper-item>Daily</paper-item>
+                    <paper-item>Hourly</paper-item>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+                <paper-input name="service-rate" type="number" required min="0"></paper-input>
+                <div class="button-actions">
+                  <paper-button raised>Save Service</paper-button>
+                </div>
+              </form>
+            </iron-form>
+
+          </div>
+        </iron-collapse>
+
+        <paper-input label="Hire Date" type="date" value="{{ user.hireDate }}"></paper-input>
+        <paper-toggle-button checked$="{{ user.isActive }}">Active</paper-toggle-button>
+
+        <div class="button-actions">
+          <paper-button raised on-tap="_handleSaved">Save</paper-button>
+        </div>
+
+      </form>
+    </iron-form>
+
+  </template>
+
+  <script>
+    class EstimatrUserEdit extends Polymer.Element {
+      static get is() { return 'estimatr-user-edit'; }
+
+      static get properties() {
+        return {
+          user: {
+            type: Object,
+            notify: true,
+            reflectToAttribute: true,
+            value: () => ({ isActive: true })
+          }
+        };
+      }
+
+      _handleSaved() {
+        const valid = this.$.form.validate();
+        if (valid) {
+          console.log(this.user);
+          this.dispatchEvent(new CustomEvent('valid-user', this.user));
+        }
+      }
+
+      _handleToggleService() {
+        this.$.collapse.toggle();
+      }
+    }
+
+    window.customElements.define(EstimatrUserEdit.is, EstimatrUserEdit);
+  </script>
+</dom-module>
