@@ -66,7 +66,7 @@ User management
   </template>
 
   <script>
-    class MyElement extends Polymer.Element {
+    class Users extends Polymer.Element {
 
       static get is() { return 'estimatr-users'; }
 
@@ -123,12 +123,12 @@ User management
       _fireUserSelected(index = -1) {
         if (index > -1) {
           const user = this.users[index];
-          this.dispatchEvent(new CustomEvent('user-selected', { index, user }));
+          this.dispatchEvent(new CustomEvent('user-selected', { detail: { index, user } }));
         }
       }
 
     }
 
-    window.customElements.define(MyElement.is, MyElement);
+    window.customElements.define(Users.is, Users);
   </script>
 </dom-module>

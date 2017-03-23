@@ -12,6 +12,7 @@
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../estimatr-users.html">
     <link rel="import" href="../estimatr-user-edit.html">
+    <link rel="import" href="../estimatr-user-detail.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
@@ -19,10 +20,17 @@
   <body>
     <h1>Users</h1>
     <estimatr-users users='[ { "firstName": "Tyler", "lastName": "Garlick", "email": "another-one@gmail.com" }, { "firstName": "Tanner", "lastName": "Crockett", "email": "someone@gmail.com" } ]'></estimatr-users>
+    <estimatr-user-detail></estimatr-user-detail>
 
     <hr>
     <br />
     <h1>Edit User</h1>
     <estimatr-user-edit user='{ }'></estimatr-user-edit>
+
+    <script>
+      document.querySelector('estimatr-users').addEventListener('user-selected', e => {
+        document.querySelector('estimatr-user-detail').user = e.detail.user;
+      });
+    </script>
   </body>
 </html>

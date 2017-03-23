@@ -1,0 +1,42 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<dom-module id="estimatr-user-detail">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      h2 {
+        margin-left: 6px;
+      }
+
+    </style>
+    <h2>User Detail</h2>
+
+    <section>
+      <paper-item>[[user.firstName]] [[user.lastName]] [[user.email]]</paper-item>
+    </section>
+  </template>
+
+  <script>
+    class UserDetail extends Polymer.Element {
+      static get is() { return 'estimatr-user-detail'; }
+
+      static get properties() {
+        return {
+          user: {
+            type: Object,
+            notify: true,
+            reflectToAttribute: true,
+            value: () => ({}),
+          }
+        };
+      }
+    }
+
+    window.customElements.define(UserDetail.is, UserDetail);
+  </script>
+</dom-module>
